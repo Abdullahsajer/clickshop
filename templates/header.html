@@ -1,6 +1,4 @@
-<!-- ✅ header.html -->
 <header class="asq-header" role="banner">
-  <!-- الشريط العلوي -->
   <div class="asq-top">
     <div class="wrap">
       <div class="mini">
@@ -25,17 +23,17 @@
         {% endif %}
       </div>
 
-      <button class="burger" aria-label="فتح القائمة الرئيسية" onclick="toggleMenu()">☰</button>
+      <button class="burger" aria-label="فتح القائمة" onclick="toggleMenu()">☰</button>
     </div>
   </div>
 
-  <!-- القائمة المنسدلة للجوال -->
-  <nav class="mobile-dropdown" aria-label="القائمة الجوالة">
+  <nav class="mobile-dropdown">
     <ul>
       <li><a href="/">الرئيسية</a></li>
       <li><a href="/brands">العلامات التجارية</a></li>
       <li><a href="/oem">قطع أصلية</a></li>
       <li><a href="/contact">اتصل بنا</a></li>
+
       {% if user.is_authenticated %}
         <li><a href="{% url 'logout' %}">تسجيل خروج</a></li>
       {% else %}
@@ -45,110 +43,6 @@
     </ul>
   </nav>
 </header>
-
-<style>
-  :root {
-    --blue-dark: #0b3a70;
-    --blue: #1565c0;
-    --orange: #ff7a1a;
-  }
-  body { margin: 0; font-family: "Cairo", sans-serif; }
-
-  .asq-header {
-    background: var(--blue-dark);
-    color: #fff;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    width: 100%;
-  }
-  .asq-top {
-    background: var(--blue);
-    padding: 8px 0;
-  }
-  .wrap {
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 16px;
-  }
-  .mini span {
-    margin: 0 8px;
-    font-size: .9rem;
-  }
-  .auth-buttons {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  .auth-btn {
-    padding: 6px 14px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: .9rem;
-    color: #fff;
-    transition: background .2s ease;
-  }
-  .login-btn {
-    background: var(--blue-dark);
-    border: 1px solid #fff;
-  }
-  .login-btn:hover {
-    background: #092c54;
-  }
-  .register-btn {
-    background: var(--orange);
-    border: 1px solid transparent;
-  }
-  .register-btn:hover {
-    background: #e66a10;
-  }
-  .logout-btn {
-    background: #a00;
-    border: 1px solid transparent;
-  }
-  .logout-btn:hover {
-    background: #900;
-  }
-  .burger {
-    display: none;
-    background: transparent;
-    border: 0;
-    color: #fff;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-  .mobile-dropdown {
-    display: none;
-    background: var(--blue-dark);
-    padding: 12px 0;
-  }
-  .mobile-dropdown ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .mobile-dropdown a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1rem;
-    padding: 8px 16px;
-  }
-  .mobile-dropdown a:hover {
-    background: var(--blue);
-  }
-
-  @media(max-width:768px){
-    .burger { display: block; }
-    .wrap .mini { display: none; }
-    .auth-buttons { display: none; }
-  }
-</style>
 
 <script>
   function toggleMenu() {

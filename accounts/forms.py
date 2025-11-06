@@ -13,4 +13,5 @@ class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
-            field.widget.attrs.update({"class": "input-field"})
+            field.widget.attrs.update({'class': 'input-field'})
+

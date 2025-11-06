@@ -3,47 +3,49 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>إنشاء حساب | ASQ</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
   <link rel="stylesheet" href="{% static 'auth.css' %}">
 </head>
 <body>
 
 {% include 'header.html' %}
 
-<main class="page-container">
-  <div class="form-container">
-    <h2>إنشاء حساب جديد</h2>
+<main>
+  <div class="page-container">
+    <div class="form-container">
+      <h2>إنشاء حساب جديد</h2>
 
-    <form method="post">
-      {% csrf_token %}
+      <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
 
-      {{ form.non_field_errors }}
+        <label>اسم المستخدم</label>
+        {{ form.username }}
 
-      <label>اسم المستخدم</label>
-      {{ form.username }}
+        <label>البريد الإلكتروني</label>
+        {{ form.email }}
 
-      <label>البريد الإلكتروني</label>
-      {{ form.email }}
+        <label>رقم الجوال (اختياري)</label>
+        {{ form.phone }}
 
-      <label>رقم الجوال (اختياري)</label>
-      {{ form.phone }}
+        <label>كلمة المرور</label>
+        {{ form.password1 }}
 
-      <label>كلمة المرور</label>
-      {{ form.password1 }}
+        <label>تأكيد كلمة المرور</label>
+        {{ form.password2 }}
 
-      <label>تأكيد كلمة المرور</label>
-      {{ form.password2 }}
+        <button type="submit">إنشاء الحساب</button>
 
-      <button type="submit">إنشاء الحساب</button>
-
-      <div class="form-footer">
-        لديك حساب بالفعل؟ <a href="{% url 'login' %}">تسجيل الدخول</a>
-      </div>
-    </form>
+        <p class="form-footer">
+          لديك حساب بالفعل؟ <a href="{% url 'login' %}">تسجيل الدخول</a>
+        </p>
+      </form>
+    </div>
   </div>
 </main>
 
 {% include 'footer.html' %}
+
 </body>
 </html>

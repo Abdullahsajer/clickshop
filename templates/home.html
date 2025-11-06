@@ -1,49 +1,23 @@
-<!-- ✅ home.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الرئيسية - ASQ</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
 {% include 'header.html' %}
 
-<main class="asq-main">
-  <section class="hero">
-    <h1>مرحبًا بك في ASQ</h1>
-    <p>متجرك الأول لشراء قطع غيار السيارات الأصلية ومضمونة الجودة.</p>
-    <a href="/brands" class="cta">استعراض القطع</a>
-  </section>
+<main>
+  <div class="page-container">
+    <h1>مرحبًا بك في متجر ASQ لبيع قطع غيار السيارات</h1>
+    <!-- محتوى الصفحة -->
+  </div>
 </main>
 
 {% include 'footer.html' %}
 
-<style>
-  /* ✅ إعداد الصفحة بنظام فلكس لتثبيت الفوتر بأسفل الصفحة */
-  html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .asq-main {
-    flex: 1; /* ✅ يجعل المحتوى يأخذ الفراغ */
-    font-family: "Cairo", sans-serif;
-    padding: 40px 20px;
-    background: #f7f9fc;
-    color: #0b3a70;
-    text-align: center;
-  }
-
-  .hero { margin: 0 auto; max-width: 600px; }
-  .hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 8px;
-    color: var(--blue-dark);
-  }
-  .hero p { color: #4b5563; margin-bottom: 24px; }
-  .cta {
-    display: inline-block;
-    background: var(--orange);
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-  .cta:hover { background: #ff6a00; }
-</style>
+</body>
+</html>

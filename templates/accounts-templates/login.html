@@ -3,42 +3,43 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تسجيل دخول | ASQ</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
   <link rel="stylesheet" href="{% static 'auth.css' %}">
 </head>
 <body>
 
 {% include 'header.html' %}
 
-<main class="page-container">
-  <div class="form-container">
-    <h2>تسجيل الدخول</h2>
+<main>
+  <div class="page-container">
+    <div class="form-container">
+      <h2>تسجيل الدخول</h2>
 
-    <form method="post">
-      {% csrf_token %}
+      <form method="post">
+        {% csrf_token %}
+        {% if error %}
+          <div class="form-error">{{ error }}</div>
+        {% endif %}
 
-      {% if error %}
-        <div style="background:#ffe1e1;color:#c20000;padding:10px;border-radius:6px;margin-bottom:12px;">
-          {{ error }}
-        </div>
-      {% endif %}
+        <label>البريد أو اسم المستخدم</label>
+        <input type="text" name="identifier" class="input-field" required placeholder="username أو email@example.com">
 
-      <label>البريد الإلكتروني أو اسم المستخدم</label>
-      <input type="text" name="identifier" required placeholder="مثال: username أو email@example.com" class="input-field">
+        <label>كلمة المرور</label>
+        <input type="password" name="password" class="input-field" required>
 
-      <label>كلمة المرور</label>
-      <input type="password" name="password" required placeholder="••••••••" class="input-field">
+        <button type="submit">دخول</button>
 
-      <button type="submit">دخول</button>
+        <p class="form-footer">
+          ليس لديك حساب؟ <a href="{% url 'register' %}">إنشاء حساب جديد</a>
+        </p>
+      </form>
 
-      <div class="form-footer">
-        ليس لديك حساب؟ <a href="{% url 'register' %}">إنشاء حساب جديد</a>
-      </div>
-    </form>
+    </div>
   </div>
 </main>
 
 {% include 'footer.html' %}
+
 </body>
 </html>
