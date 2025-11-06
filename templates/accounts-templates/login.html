@@ -5,47 +5,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>تسجيل دخول | ASQ</title>
+  <link rel="stylesheet" href="{% static 'auth.css' %}">
 </head>
 <body>
 
 {% include 'header.html' %}
 
-<div class="auth-container">
-  <form method="post" class="auth-form">
-    {% csrf_token %}
+<main class="page-container">
+  <div class="form-container">
     <h2>تسجيل الدخول</h2>
 
-    {% if error %}
-      <div class="auth-error">{{ error }}</div>
-    {% endif %}
+    <form method="post">
+      {% csrf_token %}
 
-    <label>البريد الإلكتروني أو اسم المستخدم</label>
-    <input type="text" name="identifier" required placeholder="example@mail.com أو username">
+      {% if error %}
+        <div style="background:#ffe1e1;color:#c20000;padding:10px;border-radius:6px;margin-bottom:12px;">
+          {{ error }}
+        </div>
+      {% endif %}
 
-    <label>كلمة المرور</label>
-    <input type="password" name="password" required placeholder="••••••••">
+      <label>البريد الإلكتروني أو اسم المستخدم</label>
+      <input type="text" name="identifier" required placeholder="مثال: username أو email@example.com" class="input-field">
 
-    <button type="submit" class="auth-btn">دخول</button>
+      <label>كلمة المرور</label>
+      <input type="password" name="password" required placeholder="••••••••" class="input-field">
 
-    <p class="auth-alt">
-      ليس لديك حساب؟ <a href="{% url 'register' %}">إنشاء حساب جديد</a>
-    </p>
-  </form>
-</div>
+      <button type="submit">دخول</button>
+
+      <div class="form-footer">
+        ليس لديك حساب؟ <a href="{% url 'register' %}">إنشاء حساب جديد</a>
+      </div>
+    </form>
+  </div>
+</main>
 
 {% include 'footer.html' %}
 </body>
 </html>
-
-<style>
-  body{font-family:"Cairo",sans-serif;background:#f7f9fc;color:#0f172a;margin:0;padding:0}
-  .auth-container{max-width:400px;margin:70px auto;padding:20px;background:#fff;border-radius:8px;box-shadow:0 15px 30px rgba(0,0,0,.08)}
-  .auth-form h2{margin-bottom:12px;color:#1565c0;text-align:center}
-  .auth-form label{display:block;margin-top:12px;font-weight:bold}
-  .auth-form input{width:100%;padding:10px;margin-top:6px;border:1px solid #ddd;border-radius:6px}
-  .auth-form .auth-btn{width:100%;padding:10px;margin-top:18px;background:#1565c0;color:#fff;border:none;border-radius:6px;cursor:pointer}
-  .auth-form .auth-btn:hover{background:#0b3a70}
-  .auth-alt{text-align:center;margin-top:16px}
-  .auth-alt a{color:#ff7a1a;text-decoration:none}
-  .auth-error{background:#ffe1e1;color:#c20000;padding:10px;border-radius:6px;margin-bottom:12px;text-align:center;border:1px solid #cc0000}
-</style>

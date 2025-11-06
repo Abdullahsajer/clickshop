@@ -5,53 +5,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>إنشاء حساب | ASQ</title>
+  <link rel="stylesheet" href="{% static 'auth.css' %}">
 </head>
 <body>
 
 {% include 'header.html' %}
 
-<div class="auth-container">
-  <form method="post" class="auth-form">
-    {% csrf_token %}
+<main class="page-container">
+  <div class="form-container">
     <h2>إنشاء حساب جديد</h2>
 
-    {{ form.non_field_errors }}
+    <form method="post">
+      {% csrf_token %}
 
-    <label>اسم المستخدم</label>
-    {{ form.username }}
+      {{ form.non_field_errors }}
 
-    <label>البريد الإلكتروني</label>
-    {{ form.email }}
+      <label>اسم المستخدم</label>
+      {{ form.username }}
 
-    <label>رقم الجوال (اختياري)</label>
-    {{ form.phone }}
+      <label>البريد الإلكتروني</label>
+      {{ form.email }}
 
-    <label>كلمة المرور</label>
-    {{ form.password1 }}
+      <label>رقم الجوال (اختياري)</label>
+      {{ form.phone }}
 
-    <label>تأكيد كلمة المرور</label>
-    {{ form.password2 }}
+      <label>كلمة المرور</label>
+      {{ form.password1 }}
 
-    <button type="submit" class="auth-btn">إنشاء الحساب</button>
+      <label>تأكيد كلمة المرور</label>
+      {{ form.password2 }}
 
-    <p class="auth-alt">
-      لديك حساب بالفعل؟ <a href="{% url 'login' %}">تسجيل الدخول</a>
-    </p>
-  </form>
-</div>
+      <button type="submit">إنشاء الحساب</button>
+
+      <div class="form-footer">
+        لديك حساب بالفعل؟ <a href="{% url 'login' %}">تسجيل الدخول</a>
+      </div>
+    </form>
+  </div>
+</main>
 
 {% include 'footer.html' %}
 </body>
 </html>
-
-<style>
-  body{font-family:"Cairo",sans-serif;background:#f7f9fc;color:#0f172a;margin:0;padding:0}
-  .auth-container{max-width:400px;margin:70px auto;padding:20px;background:#fff;border-radius:8px;box-shadow:0 15px 30px rgba(0,0,0,.08)}
-  .auth-form h2{margin-bottom:12px;color:#1565c0;text-align:center}
-  .auth-form label{display:block;margin-top:12px;font-weight:bold}
-  .auth-form input, .auth-form textarea{width:100%;padding:10px;margin-top:6px;border:1px solid #ddd;border-radius:6px}
-  .auth-form .auth-btn{width:100%;padding:10px;margin-top:18px;background:#1565c0;color:#fff;border:none;border-radius:6px;cursor:pointer}
-  .auth-form .auth-btn:hover{background:#0b3a70}
-  .auth-alt{text-align:center;margin-top:16px}
-  .auth-alt a{color:#ff7a1a;text-decoration:none}
-</style>
