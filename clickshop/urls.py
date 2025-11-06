@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from store import views  # ✅ استيراد دالة home من تطبيق store
 
 # ✅ تخصيص واجهة لوحة التحكم
 admin.site.site_header = "لوحة التحكم - متجر كليك شوب"
@@ -10,11 +11,9 @@ admin.site.index_title = "مرحبًا بك في لوحة الإدارة"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    # ✅ روابط التطبيقات الداخلية
-    path('', include('store.urls')),         # الصفحة الرئيسية تعرض المنتجات
-    path('accounts/', include('accounts.urls')),  # مسارات الحساب وتسجيل الدخول
-    path('orders/', include('orders.urls')),       # مسارات السلة والطلبات
+    path('', views.home, name='home'),  # ✅ الصفحة الرئيسية
+    path('accounts/', include('accounts.urls')),
+    path('orders/', include('orders.urls')),
 ]
 
 # ✅ ربط ملفات media و static في وضع التطوير فقط
