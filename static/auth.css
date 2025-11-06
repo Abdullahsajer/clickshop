@@ -47,3 +47,8 @@ button {
 button:hover {
     background: #0b3a70;
 }
+
+.register-link {
+    text-align: center;
+    margin-top: 10px;
+}
