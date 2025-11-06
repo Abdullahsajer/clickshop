@@ -12,11 +12,11 @@ class Order(models.Model):
 
     class Meta:
         verbose_name = "طلب"
-        verbose_name_plural = "الطلبات"
+        verbose_name_plural = "طلبات"
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"طلب #{self.id} بواسطة {self.user.username}"
+        return f"طلب رقم {self.id} للمستخدم {self.user.username}"
 
 
 class OrderItem(models.Model):

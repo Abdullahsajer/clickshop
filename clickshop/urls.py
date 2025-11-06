@@ -1,5 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib import admin
+
+admin.site.site_header = "لوحة التحكم - متجر كليك شوب"
+admin.site.site_title = "لوحة التحكم"
+admin.site.index_title = "مرحبًا بك في لوحة الإدارة"
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
