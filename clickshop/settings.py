@@ -35,7 +35,7 @@ ROOT_URLCONF = 'clickshop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # ✅ تعريف مجلد القوالب
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,7 +65,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ar'
 TIME_ZONE = 'Asia/Riyadh'
-USE_I18N = USE_L10N = USE_TZ = True
+
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
 
 LANGUAGES = [
     ('ar', _('Arabic')),
