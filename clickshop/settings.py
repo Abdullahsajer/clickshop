@@ -79,7 +79,16 @@ LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
 
-STATIC_URL = 'static/'
+# ✅ إعدادات الملفات الثابتة
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]  # مجلد الملفات الثابتة داخل المشروع
+STATIC_ROOT = BASE_DIR / "staticfiles"     # مكان جمع الملفات في وضع الإنتاج
+
+# ✅ إعدادات ملفات الوسائط
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / "media"            # مخصصة لحفظ الملفات المرفوعة كصور المنتجات مثلاً
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# ✅ تعريف نموذج المستخدم المخصص
 AUTH_USER_MODEL = 'accounts.CustomUser'
