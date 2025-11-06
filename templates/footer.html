@@ -1,0 +1,38 @@
+<!-- ✅ footer.html -->
+<footer class="asq-footer" role="contentinfo">
+  <div class="container">
+    <div class="cols">
+      <div class="col">
+        <h4>عن المتجر</h4>
+        <p>متجر ASQ متخصص ببيع قطع غيار السيارات بجودة مضمونة وأسعار منافسة.</p>
+      </div>
+      <div class="col">
+        <h4>روابط سريعة</h4>
+        <ul>
+          <li><a href="/">الرئيسية</a></li>
+          <li><a href="/brands">العلامات التجارية</a></li>
+          <li><a href="/contact">اتصل بنا</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>تواصل معنا</h4>
+        <p>📞 9200000000</p>
+        <p>📧 support@asq.com</p>
+      </div>
+    </div>
+    <div class="copy">
+      <p>© 2025 جميع الحقوق محفوظة لمتجر ASQ</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .asq-footer{background:var(--blue-dark);color:#fff;font-family:"Cairo",sans-serif;padding:30px 20px}
+  .container{max-width:1200px;margin:auto}
+  .cols{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px}
+  .col{flex:1;min-width:200px}
+  .col h4{margin-bottom:10px}
+  .col p,.col a{color:#d3e5ff;font-size:.9rem;text-decoration:none}
+  .copy{text-align:center;margin-top:20px;border-top:1px solid rgba(255,255,255,.2);padding-top:12px;font-size:.85rem}
+  @media(max-width:768px){.cols{flex-direction:column;text-align:center}}
+</style>

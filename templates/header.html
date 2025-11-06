@@ -1,0 +1,56 @@
+<!-- ✅ header.html -->
+<header class="asq-header" role="banner">
+  <!-- الشريط العلوي -->
+  <div class="asq-top">
+    <div class="wrap">
+      <div class="mini">
+        <span>🚚 شحن لجميع مدن المملكة</span>
+        <span>📞 تواصل معنا: 9200000000</span>
+      </div>
+      <div class="mini">
+        <span>مرحبًا بك في <b>ASQ</b> لقطع غيار السيارات</span>
+      </div>
+
+      <!-- زر القائمة للجوال -->
+      <button class="burger" aria-label="فتح القائمة الرئيسية" onclick="toggleMenu()">☰</button>
+    </div>
+  </div>
+
+  <!-- القائمة المنسدلة للجوال -->
+  <nav class="mobile-dropdown" aria-label="القائمة الجوالة">
+    <ul>
+      <li><a href="/">الرئيسية</a></li>
+      <li><a href="/brands">العلامات التجارية</a></li>
+      <li><a href="/oem">قطع أصلية</a></li>
+      <li><a href="/contact">اتصل بنا</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  :root {
+    --blue-dark: #0b3a70;
+    --blue: #1565c0;
+    --orange: #ff7a1a;
+  }
+  .asq-header{font-family:"Cairo",sans-serif;background:var(--blue-dark);color:#fff;}
+  .asq-top{background:var(--blue);padding:8px 0;}
+  .wrap{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:0 16px;}
+  .mini span{margin:0 8px;font-size:.9rem}
+  .burger{display:none;background:transparent;border:0;color:#fff;font-size:1.5rem;cursor:pointer}
+  .mobile-dropdown{display:none;background:var(--blue-dark)}
+  .mobile-dropdown ul{margin:0;padding:12px;list-style:none;display:flex;flex-direction:column;gap:10px}
+  .mobile-dropdown a{color:#fff;text-decoration:none;font-size:1rem}
+  /* أجهزة الجوال */
+  @media(max-width:768px){
+    .burger{display:block}
+    .wrap .mini{display:none}
+  }
+</style>
+
+<script>
+  function toggleMenu() {
+    const menu = document.querySelector('.mobile-dropdown');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  }
+</script>

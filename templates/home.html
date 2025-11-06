@@ -1,0 +1,21 @@
+<!-- ✅ home.html -->
+{% include 'header.html' %}
+
+<main class="asq-main">
+  <section class="hero">
+    <h1>مرحبًا بك في ASQ</h1>
+    <p>متجرك الأول لشراء قطع غيار السيارات الأصلية ومضمونة الجودة.</p>
+    <a href="/brands" class="cta">استعراض القطع</a>
+  </section>
+</main>
+
+{% include 'footer.html' %}
+
+<style>
+  .asq-main{font-family:"Cairo",sans-serif;padding:40px 20px;background:#f7f9fc;color:#0b3a70;text-align:center}
+  .hero{margin:0 auto;max-width:600px}
+  .hero h1{font-size:2.5rem;margin-bottom:8px;color:var(--blue-dark)}
+  .hero p{color:#4b5563;margin-bottom:24px}
+  .cta{display:inline-block;background:var(--orange);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;transition:all .3s}
+  .cta:hover{background:#ff6a00}
+</style>
