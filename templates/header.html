@@ -7,11 +7,24 @@
         <span>🚚 شحن لجميع مدن المملكة</span>
         <span>📞 تواصل معنا: 9200000000</span>
       </div>
+
       <div class="mini">
-        <span>مرحبًا بك في <b>ASQ</b> لقطع غيار السيارات</span>
+        {% if user.is_authenticated %}
+          <span>👤 مرحبًا، <b>{{ user.username }}</b></span>
+        {% else %}
+          <span>مرحبًا بك في <b>ASQ</b> لبيع قطع غيار السيارات</span>
+        {% endif %}
       </div>
 
-      <!-- زر القائمة للجوال -->
+      <div class="auth-buttons">
+        {% if user.is_authenticated %}
+          <a href="{% url 'logout' %}" class="auth-btn logout-btn">تسجيل خروج</a>
+        {% else %}
+          <a href="{% url 'login' %}" class="auth-btn login-btn">تسجيل دخول</a>
+          <a href="{% url 'register' %}" class="auth-btn register-btn">إنشاء حساب</a>
+        {% endif %}
+      </div>
+
       <button class="burger" aria-label="فتح القائمة الرئيسية" onclick="toggleMenu()">☰</button>
     </div>
   </div>
@@ -23,6 +36,12 @@
       <li><a href="/brands">العلامات التجارية</a></li>
       <li><a href="/oem">قطع أصلية</a></li>
       <li><a href="/contact">اتصل بنا</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">تسجيل خروج</a></li>
+      {% else %}
+        <li><a href="{% url 'login' %}">تسجيل دخول</a></li>
+        <li><a href="{% url 'register' %}">إنشاء حساب</a></li>
+      {% endif %}
     </ul>
   </nav>
 </header>
@@ -33,18 +52,101 @@
     --blue: #1565c0;
     --orange: #ff7a1a;
   }
-  .asq-header{font-family:"Cairo",sans-serif;background:var(--blue-dark);color:#fff;}
-  .asq-top{background:var(--blue);padding:8px 0;}
-  .wrap{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:0 16px;}
-  .mini span{margin:0 8px;font-size:.9rem}
-  .burger{display:none;background:transparent;border:0;color:#fff;font-size:1.5rem;cursor:pointer}
-  .mobile-dropdown{display:none;background:var(--blue-dark)}
-  .mobile-dropdown ul{margin:0;padding:12px;list-style:none;display:flex;flex-direction:column;gap:10px}
-  .mobile-dropdown a{color:#fff;text-decoration:none;font-size:1rem}
-  /* أجهزة الجوال */
+  body { margin: 0; font-family: "Cairo", sans-serif; }
+
+  .asq-header {
+    background: var(--blue-dark);
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+  }
+  .asq-top {
+    background: var(--blue);
+    padding: 8px 0;
+  }
+  .wrap {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+  }
+  .mini span {
+    margin: 0 8px;
+    font-size: .9rem;
+  }
+  .auth-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .auth-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: .9rem;
+    color: #fff;
+    transition: background .2s ease;
+  }
+  .login-btn {
+    background: var(--blue-dark);
+    border: 1px solid #fff;
+  }
+  .login-btn:hover {
+    background: #092c54;
+  }
+  .register-btn {
+    background: var(--orange);
+    border: 1px solid transparent;
+  }
+  .register-btn:hover {
+    background: #e66a10;
+  }
+  .logout-btn {
+    background: #a00;
+    border: 1px solid transparent;
+  }
+  .logout-btn:hover {
+    background: #900;
+  }
+  .burger {
+    display: none;
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  .mobile-dropdown {
+    display: none;
+    background: var(--blue-dark);
+    padding: 12px 0;
+  }
+  .mobile-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .mobile-dropdown a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+  .mobile-dropdown a:hover {
+    background: var(--blue);
+  }
+
   @media(max-width:768px){
-    .burger{display:block}
-    .wrap .mini{display:none}
+    .burger { display: block; }
+    .wrap .mini { display: none; }
+    .auth-buttons { display: none; }
   }
 </style>
 

@@ -1,30 +1,57 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>إنشاء حساب جديد</title>
-    <style>
-        body { font-family: "Cairo", sans-serif; background: #f0f4f8; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .form-container { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,.1); width: 360px; }
-        h2 { margin-bottom: 15px; color: #0b3a70; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input, textarea { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ddd; }
-        button { width: 100%; padding: 10px; background: #1565c0; color: white; border: none; border-radius: 6px; cursor: pointer; }
-        button:hover { background: #0b3a70; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إنشاء حساب | ASQ</title>
 </head>
 <body>
-    <div class="form-container">
-        <h2>إنشاء حساب جديد</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">تسجيل</button>
-        </form>
-        <p style="text-align:center; margin-top:10px;">
-            <a href="{% url 'accounts:login' %}">لديك حساب بالفعل؟ تسجيل الدخول</a>
-        </p>
-    </div>
+
+{% include 'header.html' %}
+
+<div class="auth-container">
+  <form method="post" class="auth-form">
+    {% csrf_token %}
+    <h2>إنشاء حساب جديد</h2>
+
+    {{ form.non_field_errors }}
+
+    <label>اسم المستخدم</label>
+    {{ form.username }}
+
+    <label>البريد الإلكتروني</label>
+    {{ form.email }}
+
+    <label>رقم الجوال (اختياري)</label>
+    {{ form.phone }}
+
+    <label>كلمة المرور</label>
+    {{ form.password1 }}
+
+    <label>تأكيد كلمة المرور</label>
+    {{ form.password2 }}
+
+    <button type="submit" class="auth-btn">إنشاء الحساب</button>
+
+    <p class="auth-alt">
+      لديك حساب بالفعل؟ <a href="{% url 'login' %}">تسجيل الدخول</a>
+    </p>
+  </form>
+</div>
+
+{% include 'footer.html' %}
 </body>
 </html>
+
+<style>
+  body{font-family:"Cairo",sans-serif;background:#f7f9fc;color:#0f172a;margin:0;padding:0}
+  .auth-container{max-width:400px;margin:70px auto;padding:20px;background:#fff;border-radius:8px;box-shadow:0 15px 30px rgba(0,0,0,.08)}
+  .auth-form h2{margin-bottom:12px;color:#1565c0;text-align:center}
+  .auth-form label{display:block;margin-top:12px;font-weight:bold}
+  .auth-form input, .auth-form textarea{width:100%;padding:10px;margin-top:6px;border:1px solid #ddd;border-radius:6px}
+  .auth-form .auth-btn{width:100%;padding:10px;margin-top:18px;background:#1565c0;color:#fff;border:none;border-radius:6px;cursor:pointer}
+  .auth-form .auth-btn:hover{background:#0b3a70}
+  .auth-alt{text-align:center;margin-top:16px}
+  .auth-alt a{color:#ff7a1a;text-decoration:none}
+</style>

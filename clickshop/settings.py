@@ -91,4 +91,5 @@ MEDIA_ROOT = BASE_DIR / "media"            # مخصصة لحفظ الملفات 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ✅ تعريف نموذج المستخدم المخصص
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = "accounts.CustomUser"
+
