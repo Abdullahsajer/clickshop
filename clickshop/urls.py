@@ -14,6 +14,9 @@ urlpatterns = [
     path('', views.home, name='home'),  # ✅ الصفحة الرئيسية
     path('accounts/', include('accounts.urls')),
     path('orders/', include('orders.urls')),
+    path('store/', include('store.urls', namespace='store')),
+    path('', views.home, name='home'),
+
 ]
 
 # ✅ ربط ملفات media و static في وضع التطوير فقط

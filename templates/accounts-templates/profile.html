@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>ملفي الشخصي | ASQ</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="{% static 'auth.css' %}">
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<main>
+  <div class="page-container">
+    <div class="form-container">
+      <h2>الملف الشخصي</h2>
+
+      {% if messages %}
+        {% for message in messages %}
+        <div class="form-success">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+
+        <label>اسم المستخدم</label>
+        {{ form.username }}
+
+        <label>البريد الإلكتروني</label>
+        {{ form.email }}
+
+        <label>رقم الجوال</label>
+        {{ form.phone }}
+
+        <label>العنوان</label>
+        {{ form.address }}
+
+        <button type="submit">حفظ التعديلات</button>
+
+        <p class="form-footer">
+          <a href="{% url 'logout' %}" style="color:#d9534f;">تسجيل الخروج</a>
+        </p>
+
+      </form>
+    </div>
+  </div>
+</main>
+
+{% include 'footer.html' %}
+
+</body>
+</html>

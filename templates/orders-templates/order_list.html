@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>طلباتك - ASQ</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<main>
+  <div class="page-container">
+
+    <!-- بنر أو عنوان الصفحة -->
+    <h1 class="page-title">طلباتك الخاصة</h1>
+
+    <!-- عرض الطلبات -->
+    <section class="orders-section">
+      {% if orders %}
+        <ul class="orders-list">
+          {% for order in orders %}
+            <li class="order-item">
+              <div class="order-info">
+                <span><b>طلب رقم:</b> {{ order.id }}</span>
+                <span><b>تاريخ:</b> {{ order.created_at|date:"Y-m-d H:i" }}</span>
+                <span><b>الحالة:</b> {% if order.paid %}مدفوع{% else %}غير مدفوع{% endif %}</span>
+              </div>
+              <a href="{% url 'orders:order_detail' order.id %}" class="btn-small">عرض التفاصيل</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>لا توجد طلبات حتى الآن.</p>
+      {% endif %}
+    </section>
+
+    <!-- قسم عرض المنتجات -->
+    <section class="products-section">
+      <h2 class="section-title">منتجات مميزة</h2>
+      {% include 'store-templates/product_list.html' %}
+    </section>
+
+  </div>
+</main>
+
+{% include 'footer.html' %}
+
+</body>
+</html>
