@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField  # ✅ استيراد CloudinaryField
 
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="اسم الفئة")
@@ -21,7 +22,10 @@ class Product(models.Model):
     slug = models.SlugField(max_length=255, unique=True, verbose_name="الرابط المختصر")
     description = models.TextField(verbose_name="الوصف")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="السعر")
-    image = models.ImageField(upload_to='products/%Y/%m/%d', verbose_name="صورة المنتج", help_text="ارفع صورة المنتج الرئيسية")
+
+    # ✅ استخدام CloudinaryField بشكل صحيح
+    image = CloudinaryField(verbose_name="صورة المنتج", help_text="ارفع صورة المنتج الرئيسية")
+
     available = models.BooleanField(default=True, verbose_name="متاح")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاريخ الإضافة")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="آخر تحديث")

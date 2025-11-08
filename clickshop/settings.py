@@ -1,5 +1,13 @@
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+from dotenv import load_dotenv
+import os
+
+# ✅ تحميل متغيرات البيئة
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -7,6 +15,7 @@ SECRET_KEY = 'django-insecure-e)e8%_x-md&t_=87szpi&7&jl#7)i-0+qfi9^9-c)4c7j456)p
 DEBUG = True
 ALLOWED_HOSTS = []
 
+# ✅ تطبيقات المشروع
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -17,8 +26,11 @@ INSTALLED_APPS = [
     'store',
     'accounts',
     'orders',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
+# ✅ ميدلوير المشروع
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -32,10 +44,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'clickshop.urls'
 
+# ✅ الإعدادات الخاصة بالقوالب
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # ✅ تعريف مجلد القوالب
+        'DIRS': [BASE_DIR / 'templates'],  # تعريف مجلد القوالب
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -50,6 +63,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'clickshop.wsgi.application'
 
+# ✅ قاعدة البيانات
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -57,6 +71,7 @@ DATABASES = {
     }
 }
 
+# ✅ إعدادات كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -64,9 +79,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+# ✅ إعدادات اللغة والمنطقة الزمنية
 LANGUAGE_CODE = 'ar'
 TIME_ZONE = 'Asia/Riyadh'
-
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -82,15 +97,31 @@ LOCALE_PATHS = [
 
 # ✅ إعدادات الملفات الثابتة
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]  # مجلد الملفات الثابتة داخل المشروع
-STATIC_ROOT = BASE_DIR / "staticfiles"     # مكان جمع الملفات في وضع الإنتاج
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # ✅ إعدادات ملفات الوسائط
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / "media"            # مخصصة لحفظ الملفات المرفوعة كصور المنتجات مثلاً
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+MEDIA_ROOT = BASE_DIR / "media"
 
 # ✅ تعريف نموذج المستخدم المخصص
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "accounts.CustomUser"
 
+# ✅ إعدادات Cloudinary
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}
+
+# ✅ تهيئة Cloudinary
+cloudinary.config(
+    cloud_name=os.getenv('CLOUDINARY_NAME'),
+    api_key=os.getenv('CLOUDINARY_API_KEY'),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET'),
+    secure=True
+)
+
+# ✅ استخدم Cloudinary بدلاً من التخزين الافتراضي
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
