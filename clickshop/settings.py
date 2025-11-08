@@ -11,9 +11,9 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-e)e8%_x-md&t_=87szpi&7&jl#7)i-0+qfi9^9-c)4c7j456)p'
-DEBUG = True
-ALLOWED_HOSTS = []
+SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key')
+DEBUG = os.getenv('ENV_MODE') != 'production'
+ALLOWED_HOSTS = ['*'] if DEBUG else ['yourdomain.com']  # ✅ عدل اسم النطاق عند الإنتاج
 
 # ✅ تطبيقات المشروع
 INSTALLED_APPS = [
@@ -63,13 +63,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'clickshop.wsgi.application'
 
-# ✅ قاعدة البيانات
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# ✅ قاعدة البيانات - يدعم التطوير والإنتاج
+if os.getenv('ENV_MODE') == 'production':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # ✅ إعدادات كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
