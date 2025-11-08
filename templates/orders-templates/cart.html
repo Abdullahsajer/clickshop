@@ -1,0 +1,38 @@
+{% load static %}
+{% include 'header.html' %}
+
+<main class="page-container">
+  <h1>🛒 سلة المشتريات</h1>
+
+  {% if order and order.items.all %}
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>المنتج</th>
+          <th>الكمية</th>
+          <th>السعر الفردي</th>
+          <th>الإجمالي</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in order.items.all %}
+          <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price }} ر.س</td>
+            <td>{{ item.subtotal }} ر.س</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="cart-actions">
+      <a href="{% url 'store:products' %}" class="secondary-cta-btn">متابعة التسوق</a>
+      <a href="{% url 'orders:checkout' %}" class="cta-btn">متابعة الشراء</a>
+    </div>
+  {% else %}
+    <p>⚠️ السلة فارغة حالياً. ابدأ إضافة بعض المنتجات من <a href="{% url 'store:products' %}">هنا</a>.</p>
+  {% endif %}
+</main>
+
+{% include 'footer.html' %}

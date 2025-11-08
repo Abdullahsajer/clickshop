@@ -1,0 +1,45 @@
+{% load static %}
+{% include 'header.html' %}
+
+<main class="page-container">
+  <h1>📦 طلباتي السابقة</h1>
+
+  {% if orders %}
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>رقم الطلب</th>
+          <th>المبلغ</th>
+          <th>الحالة</th>
+          <th>التاريخ</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+          <tr>
+            <td>#{{ order.id }}</td>
+            <td>{{ order.total }} ر.س</td>
+            <td>{% if order.is_paid %}✅ مدفوع {% else %}❌ غير مدفوع {% endif %}</td>
+            <td>{{ order.created_at|date:"d M Y" }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>⚠️ ليس لديك طلبات بعد.</p>
+  {% endif %}
+</main>
+
+{% include 'footer.html' %}
+
+<style>
+  .orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+  }
+  .orders-table th, .orders-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+</style>

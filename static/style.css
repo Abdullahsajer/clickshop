@@ -151,3 +151,63 @@ main {
         display: none;
     }
 }
+
+/* ====== Cart Styles ====== */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+}
+.cart-table th, .cart-table td {
+    padding: 12px;
+    text-align: right;
+    border-bottom: 1px solid #e3e3e3;
+}
+.cart-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+.secondary-cta-btn {
+    background: #1565c0;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ====== Checkout Styles ====== */
+.checkout-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 25px;
+}
+form, .summary {
+    width: 48%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.06);
+}
+.input-field {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+.cta-btn { /* This is used in both cart and checkout for primary actions */
+    margin-top: 20px;
+    display: inline-block;
+    background: #ff7a1a;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.cta-btn.checkout-confirm { /* Specific style for checkout confirmation button */
+    background: #1565c0;
+    padding: 12px 24px;
+}

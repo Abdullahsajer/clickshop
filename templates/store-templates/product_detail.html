@@ -23,8 +23,8 @@
         <p>{{ product.description }}</p>
         <h3 class="price">{{ product.price }} ر.س</h3>
 
-        {% if product.available %}
-          <button class="add-to-cart-btn">إضافة للسلة</button>
+       {% if product.available %}
+          <a href="{% url 'orders:add_to_order' product.id %}" class="add-to-cart-btn">إضافة للسلة</a>
         {% else %}
           <span class="out-of-stock-label">غير متاح حالياً</span>
         {% endif %}
@@ -64,6 +64,21 @@
     color: #1565c0;
     text-decoration: none;
     font-weight: bold;
+  }
+  .add-to-cart-btn {
+    display: inline-block;
+    background: #ff7a1a;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: .2s;
+  }
+  .add-to-cart-btn:hover {
+    background: #e66a10;
   }
 </style>
 

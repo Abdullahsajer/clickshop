@@ -1,0 +1,38 @@
+{% load static %}
+{% include 'header.html' %}
+
+<main class="page-container">
+  <h1>✅ تم استلام طلبك بنجاح!</h1>
+
+  <p>شكراً لك، سيتم معالجة طلبك خلال أقرب وقت.</p>
+
+  <div class="success-box">
+    <h3>📄 تفاصيل الطلب</h3>
+    <p>رقم الطلب: <strong>#{{ order.id }}</strong></p>
+    <p>الإجمالي النهائي: <strong>{{ order.total }} ر.س</strong></p>
+    <p>تاريخ الطلب: <strong>{{ order.created_at|date:"d M Y" }}</strong></p>
+  </div>
+
+  <a href="{% url 'store:products' %}" class="cta-btn">التسوق مجددًا</a>
+  <a href="{% url 'orders:orders_list' %}" class="cta-btn">عرض طلباتي</a>
+</main>
+
+{% include 'footer.html' %}
+
+<style>
+  .success-box {
+    margin-top: 25px;
+    padding: 20px;
+    background: #e9fbe9;
+    border: 1px solid #b7e2b7;
+    border-radius: 8px;
+  }
+  .cta-btn {
+    margin: 10px;
+    background: #0b3a70;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+</style>

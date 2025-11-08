@@ -1,0 +1,38 @@
+{% load static %}
+{% include 'header.html' %}
+
+<main class="page-container">
+  <h1>💳 إتمام الطلب</h1>
+
+  <div class="checkout-container">
+    <form method="post">
+      {% csrf_token %}
+
+      <label>الاسم الكامل</label>
+      <input type="text" name="full_name" class="input-field" required>
+
+      <label>العنوان</label>
+      <input type="text" name="address" class="input-field" required>
+
+      <label>رقم الجوال</label>
+      <input type="text" name="phone" class="input-field" required>
+
+      <label>المدينة</label>
+      <input type="text" name="city" class="input-field" required>
+
+      <button type="submit" class="cta-btn checkout-confirm">تأكيد الطلب</button>
+    </form>
+
+    <div class="summary">
+      <h3>مراجعة الطلب</h3>
+      <ul>
+        {% for item in order.items.all %}
+          <li>{{ item.quantity }} × {{ item.product.name }} - {{ item.subtotal }} ر.س</li>
+        {% endfor %}
+      </ul>
+      <p><strong>الإجمالي: {{ order.total }} ر.س</strong></p>
+    </div>
+  </div>
+</main>
+
+{% include 'footer.html' %}

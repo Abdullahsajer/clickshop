@@ -11,7 +11,7 @@
           <div class="product-price">{{ product.price }} ر.س</div>
           
           {% if product.available %}
-            <button class="add-to-cart-btn" onclick="alert('تمت الإضافة إلى السلة!')">إضافة للسلة</button>
+            <a href="{% url 'orders:add_to_order' product.id %}" class="add-to-cart-btn">إضافة للسلة</a>
           {% else %}
             <span class="out-of-stock-label">غير متاح حالياً</span>
           {% endif %}

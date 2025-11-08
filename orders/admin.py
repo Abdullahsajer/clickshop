@@ -9,8 +9,8 @@ class OrderItemInline(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'paid', 'created_at')
-    list_filter = ('paid', 'created_at')
+    list_display = ('id', 'user', 'is_paid', 'total_price', 'created_at')
+    list_filter = ('is_paid', 'created_at')
     search_fields = ('user__username',)
     inlines = [OrderItemInline]
 

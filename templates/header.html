@@ -1,52 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+
 <header class="asq-header" role="banner">
+
+  <!-- ✅ الشريط العلوي -->
   <div class="asq-top">
     <div class="wrap">
       <div class="mini">
-        <span>🚚 شحن لجميع مدن المملكة</span>
+        <span>🚚 نحن نشحن لجميع مدن المملكة</span>
         <span>📞 تواصل معنا: 9200000000</span>
       </div>
 
+      <!-- ✅ روابط المستخدم -->
       <div class="mini">
         {% if user.is_authenticated %}
-          <span>👤 مرحبًا، <b>{{ user.username }}</b></span>
+          <span>مرحبًا، {{ user.username }} 👤</span>
+          <a href="{% url 'accounts:logout' %}" class="logout-btn">تسجيل خروج</a>
         {% else %}
-          <span>مرحبًا بك في <b>ASQ</b> لبيع قطع غيار السيارات</span>
+          <a href="{% url 'accounts:login' %}" class="auth-btn login-btn">تسجيل دخول</a>
+          <a href="{% url 'accounts:register' %}" class="auth-btn register-btn">إنشاء حساب</a>
         {% endif %}
       </div>
 
-      <div class="auth-buttons">
-        {% if user.is_authenticated %}
-          <a href="{% url 'logout' %}" class="auth-btn logout-btn">تسجيل خروج</a>
-        {% else %}
-          <a href="{% url 'login' %}" class="auth-btn login-btn">تسجيل دخول</a>
-          <a href="{% url 'register' %}" class="auth-btn register-btn">إنشاء حساب</a>
-        {% endif %}
-      </div>
-
-      <button class="burger" aria-label="فتح القائمة" onclick="toggleMenu()">☰</button>
+      <!-- ✅ زر القائمة للجوال -->
+      <button class="burger" aria-label="فتح القائمة الرئيسية">☰</button>
     </div>
   </div>
 
-  <nav class="mobile-dropdown">
-    <ul>
-      <li><a href="/">الرئيسية</a></li>
-      <li><a href="/brands">العلامات التجارية</a></li>
-      <li><a href="/oem">قطع أصلية</a></li>
-      <li><a href="/contact">اتصل بنا</a></li>
+  <!-- ✅ الشريط الرئيسي -->
+  <nav class="asq-menu" aria-label="القائمة الرئيسية">
+    <ul class="menu">
+      <li><a href="{% url 'home' %}">🏠 الرئيسية</a></li>
+      <li><a href="{% url 'store:products' %}">🛒 جميع المنتجات</a></li>
 
       {% if user.is_authenticated %}
-        <li><a href="{% url 'logout' %}">تسجيل خروج</a></li>
-      {% else %}
-        <li><a href="{% url 'login' %}">تسجيل دخول</a></li>
-        <li><a href="{% url 'register' %}">إنشاء حساب</a></li>
+        <li><a href="{% url 'orders:order_view' %}">🛍 سلة المشتريات {% if cart_count %} ({{ cart_count }}) {% endif %}</a></li>
+        <li><a href="#">📦 طلباتي</a></li>
       {% endif %}
     </ul>
   </nav>
+
+  <!-- ✅ القائمة المنسدلة للجوال -->
+  <nav class="mobile-dropdown" aria-label="القائمة الجوالة">
+    <ul>
+      <li><a href="{% url 'home' %}">🏠 الرئيسية</a></li>
+      <li><a href="{% url 'store:products' %}">🛒 جميع المنتجات</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'orders:order_view' %}">🛍 سلة المشتريات {% if cart_count %} ({{ cart_count }}) {% endif %}</a></li>
+        <li><a href="#">📦 طلباتي</a></li>
+        <li><a href="{% url 'accounts:logout' %}">🚪 تسجيل خروج</a></li>
+      {% else %}
+        <li><a href="{% url 'accounts:login' %}">🔐 تسجيل دخول</a></li>
+        <li><a href="{% url 'accounts:register' %}">🧾 إنشاء حساب</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
 </header>
 
 <script>
-  function toggleMenu() {
-    const menu = document.querySelector('.mobile-dropdown');
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-  }
+  // ✅ تفعيل القائمة في الجوال
+  document.querySelector(".burger").addEventListener("click", function() {
+    document.querySelector(".mobile-dropdown").classList.toggle("show");
+  });
 </script>
+
+<style>
+  .mobile-dropdown.show {
+    display: block !important;
+  }
+</style>
